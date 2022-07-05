@@ -2,8 +2,8 @@ import {useState} from 'react';
 import './signup.css'
 import NavigationBar from '../../components/navigation'
 
-// Import Global User state 
-import {User, SetUser} from "../../store/atoms"
+// Import Global User state to set User
+import {SetUser} from "../../store/atoms"
 
 // Import 
 import  {useSetRecoilState} from "recoil";
@@ -133,8 +133,6 @@ function SignUpForm(props){
 
             // Set up global user state.
             setUser(signUpRes)
-            
-
     }
 }
 
@@ -187,6 +185,9 @@ function SignUpForm(props){
             <button>
                 Sign Up
             </button>
+            <p>
+                Already have an account ? <a href="#">Sign in here</a>
+            </p>
         </form>
     )
 }
