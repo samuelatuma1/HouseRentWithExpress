@@ -15,13 +15,14 @@ const signToken = id => {
 /**
  * @desc Signs up a User 
  * @route POST /auth/signup
- * @access PRIVATE
+ * @access PUBLIC
  * @param {express.Request} req 
  * @param {express.Response} res 
  * @returns the signed up user || error
  */
 const SignUpController = async (req, res) => {
     // Validate form
+    console.log(req.body, req.hostname, req.originalUrl)
     let formErrs = validationResult(req).errors
     if (formErrs.length > 0){
         return res.json({formErrs})
@@ -42,15 +43,16 @@ const SignUpController = async (req, res) => {
         
         // Tokenize ID
 
-        let token = signToken(saveUser._id)
-        saveUser.token = token
-        return res.status(201).json({user: saveUser, token})
+        let usertoken = signToken(saveUser._id)
+        saveUser.token = usertoken
+        let { email, fullName, token } = saveUser 
+        return res.status(201).json({ email, fullName, token })
 
 
 
     } 
     catch(err){
-        return res.status(403).json({dbErr: err})
+        return res.status(200).json({dbErr: err})
     }
 }
 
