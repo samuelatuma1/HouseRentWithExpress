@@ -7,6 +7,9 @@ import {SetUser} from "../../store/atoms"
 
 // Import 
 import  {useSetRecoilState} from "recoil";
+
+// Route link
+import {Link} from "react-router-dom";
 // Strong password check
 function strongPasswordCheck(password) {
     const response = {
@@ -186,7 +189,10 @@ function SignUpForm(props){
                 Sign Up
             </button>
             <p>
-                Already have an account ? <a href="#">Sign in here</a>
+                Already have an account ?
+                    <Link to="/signin">
+                        Sign in here
+                    </Link>
             </p>
         </form>
     )

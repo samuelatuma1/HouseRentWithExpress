@@ -98,8 +98,8 @@ export default function NavigationBar(props){
             </section>
 
             <section className='auth'>
-                <li>Sign In</li>
-                <li className='signup'>Sign Up</li>
+                <li className='signin'>Sign In</li>
+                {/* <li className='signup'>Sign Up</li> */}
             </section>
 
             </ul>                    
