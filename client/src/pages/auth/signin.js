@@ -10,7 +10,7 @@ import  {useSetRecoilState} from "recoil";
 
 // Routing tool
 
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 
 function SignInForm(props){
     
@@ -23,6 +23,11 @@ function SignInForm(props){
     // Handle form Errors
     const [formErrs, setFormErrs] = useState([])
 
+    // set up navigation tool
+    const navigate = useNavigate()
+
+    // Global User state Manager
+    const StoreUser = useSetRecoilState(SetUser)
     // Handle Form success
     const [formSuccess, setFormSuccess] = useState([])
     // E.g  formError [
@@ -46,7 +51,7 @@ function SignInForm(props){
     
         // Submit form to server
         let formBody = formData
-        const signUpReq = await fetch("/auth/signup", {
+        const signInReq = await fetch("/auth/signin", {
             method: 'POST',
             mode: 'cors', 
             cache: 'no-cache', 
@@ -58,9 +63,13 @@ function SignInForm(props){
             referrerPolicy: 'no-referrer',  
             body: JSON.stringify(formBody)
         })
-        if(signUpReq.ok){
-            const signInRes = await signUpReq.json()            
-            console.log(signInRes)
+        if(signInReq.ok){
+            const signInRes = await signInReq.json()            
+            // Set User globally in app
+            StoreUser(signInRes)
+            
+            // Redirect to home page
+            navigate("/home")
     }
 }
 

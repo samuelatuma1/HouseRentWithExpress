@@ -43,7 +43,7 @@ const SetUser = selector({
         // Set user in local storage
         localStorage.setItem("user", JSON.stringify(newUser))
         // Set User to newUser
-        set(User, newUser)
+        return set(User, newUser)
     }
 })
 // const SetUser = selector({
