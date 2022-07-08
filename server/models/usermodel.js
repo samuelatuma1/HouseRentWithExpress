@@ -32,6 +32,10 @@ const UserSchema = new mongoose.Schema({
     location: {
         type: String,
         default: 'Nigeria'
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false
     }
 }, {
     timestamps: true

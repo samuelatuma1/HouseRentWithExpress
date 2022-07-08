@@ -15,7 +15,8 @@
     -@payload {
             fullName : string,
             email: string,
-            password: string
+            password: string,
+            password2: string
         }
     - @desc 
         Stores Payload data in database, hash password

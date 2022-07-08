@@ -25,15 +25,44 @@ app.use(express.urlencoded({extended: true}))
 
 
 // Routes
-const auth = require("./urls/auth.js")
+// Auth Route
+const authRoute = require("./urls/auth.js")
+app.use("/auth", authRoute)
 
-app.use("/auth", auth)
+// house Route
+const houseRoute = require("./urls/house.js")
+app.use("/house", houseRoute)
+
+
+// Admin Route
+const adminRoute = require("./urls/admin.js")
+app.use("/admin", adminRoute)
+
+
+// Test out Multer
+// Import path
+const path = require("path")
+// Set up
+
+
+
+const upload = require("./middlewares/houseFileUploadHandler")
+
+// Test out Multer on upload route
+app.post("/upload", upload.fields([
+    {name: "profilePic", maxCount: 2}
+]), (req, res) => {
+    for(let fileName  in req.files) {
+        const files = req.files[fileName]
+        for(let fileData of files){
+            console.log('filepath => ', fileData.path)
+        }
+    }
+    return res.json("sha256")
+})
 
 //  Listening on PORT
 const PORT = process.env.PORT || 8080
-
-
-
 app.listen(PORT, () => console.log(`App running on PORT ${PORT}`))
 
 
