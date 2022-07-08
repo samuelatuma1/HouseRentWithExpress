@@ -12,15 +12,15 @@ const {validationResult} = require("express-validator")
         "city": "PH", "state": "Rivers", "country": "Nigeria", "_id": "62c",
         "__v": 0 }
 * OR    {
-  "msg": "city already exists",
-  "city": "PH", "state": "Rivers", "_id": "62c"
-} if city already exists in City Collection
+            "msg": "city already exists",
+            "city": "PH", "state": "Rivers", "_id": "62c"
+            } if city already exists in City Collection
 OR {
-  "formErrs": [
-    {"value": "", "msg": "Invalid value", "param": "state","location": "body"}
-]
+    "formErrs": [
+        {"value": "", "msg": "Invalid value", "param": "state","location": "body"}
+    ]
 } if Form errs 
- */
+*/
 async function addCityController(req, res){
     try{
         // Validate city data
@@ -58,4 +58,28 @@ async function addCityController(req, res){
     }
 }
 
-module.exports = {addCityController}
+/**
+ * @returns all Cadded cities sorted first by country, then by state, lastly by city
+ */
+async function getCitiesController(req, res){
+    // Sort countries by country, then by state, lastly by city
+    const allCities = await City.where({}).sortResult()
+    return res.json(allCities)
+}
+
+async function updateCityController(req, res){
+    // Handle form validation
+    const formErrs = validationResult(req).errors
+    if(formErrs.length > 0){
+        return res.status(400).json({formErrs})
+    }
+    // Find city
+    const id = req.params.id
+
+    // Update property
+    const updateCity = await City.findByIdAndUpdate(id, req.body)
+    if(!updateCity)
+        return res.sendStatus(404);
+    return res.sendStatus(204)
+}
+module.exports = {addCityController, getCitiesController, updateCityController}

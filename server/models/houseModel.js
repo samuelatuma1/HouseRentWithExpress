@@ -131,6 +131,14 @@ const CitySchema = new mongoose.Schema({
     }
 })
 
+/**
+ * 
+ * @returns sorted City Collection firt by country, then by state and finally city
+ */
+CitySchema.query.sortResult = function(){
+    return this.sort({country: 1, state: 1, city: 1})
+}
+
 const City = mongoose.model("City", CitySchema)
 const House = mongoose.model("House", HouseSchema)
 const HouseImg = mongoose.model("HouseImg", HouseImgSchema)

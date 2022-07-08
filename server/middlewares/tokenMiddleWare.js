@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken")
 const User = require('../models/usermodel.js')
 
 /**
- * @desc Attempts to decrypt JWT Token in Bearer. Adds user to request object. i.e req.user = foundUser with Token
+ * @desc Attempts to decrypt JWT Token in Bearer. Adds userId to request object. i.e req.userId = foundUser Id with Token
  * @param {express.Request} req 
  * @param {express.Response} res 
  * @param {*} next 

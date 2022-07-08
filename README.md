@@ -27,11 +27,15 @@
              "param": "fullName",
              "location": "body"
            }]} OR 
-        {dbErr: object[
-             {
-                
-             }
-        ]}
+        {dbErr:{
+            "index": number,
+            "code": number,
+            "keyPattern": {
+            "email": 1
+            },
+            "keyValue": {
+            "email": "email"
+            }}
 </ul>
 
 <ul>

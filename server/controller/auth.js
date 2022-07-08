@@ -43,6 +43,7 @@ const SignUpController = async (req, res) => {
             {
                 fullName : req.body.fullName,
                 email: req.body.email,
+                // isAdmin: true, 
                 password: hashData(req.body.password)
             }
         )
