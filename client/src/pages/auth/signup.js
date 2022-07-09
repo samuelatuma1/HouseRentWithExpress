@@ -141,7 +141,7 @@ function SignUpForm(props){
 
 
     return (
-        <form onSubmit={submitUserForm}>
+        <form onSubmit={submitUserForm} className="Authform">
             <h1>Sign Up to House Rent</h1>
             {
                 formErrs ? (

@@ -75,7 +75,7 @@ function SignInForm(props){
 
 
     return (
-        <form onSubmit={submitUserForm}>
+        <form onSubmit={submitUserForm} className="Authform">
             <h1>Sign In to House Rent</h1>
             {
                 formErrs.map((err, id) => (

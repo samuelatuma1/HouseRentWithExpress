@@ -82,4 +82,11 @@ async function updateCityController(req, res){
         return res.sendStatus(404);
     return res.sendStatus(204)
 }
-module.exports = {addCityController, getCitiesController, updateCityController}
+
+async function deleteCityController(req, res){
+    // Find city
+    const id = req.params.id
+    await City.findByIdAndDelete(id)
+    return res.sendStatus(204)
+}
+module.exports = {addCityController, getCitiesController, updateCityController, deleteCityController}

@@ -16,13 +16,13 @@ body{
     padding : 20px;
     list-style-type : circle;
     margin : 10px 0px 10px 0px;
-    border-radius: 5px;;
+    border-radius: 5px;
     
 }
 .formSuccess{
     background-color : var(--success, teal);
 }
-form {
+.Authform {
     width : 90%;
     padding : 20px;
     border: 1px solid rgb(245, 240, 240);
@@ -32,14 +32,14 @@ form {
     margin: 20px auto;
     
 }
-form:hover{
+.Authform:hover{
     box-shadow : 0px 0px 10px 2px rgb(194, 192, 192);
 }
-form h1, form h2{
+.Authform h1, .Authform h2{
     font-weight: lighter;
 }
 
-form input{
+.Authform input{
     display : block;
     width : 100%;
     padding : 20px;
@@ -49,7 +49,7 @@ form input{
     outline: none;
     transition : 0.5s;
 }
-form input:focus{
+.Authform input:focus{
     background-color : white;
     border: 1px solid transparent;
     box-shadow: 0px 0px 8px 0px rgb(179, 179, 179);
@@ -58,12 +58,12 @@ form input:focus{
 }
 
 @media screen and (min-width: 620px){
-        form {
+        .Authform {
             max-width : 600px;
         }
 }
 
-form button{
+.Authform button{
     display : block;
     padding : 15px;
     border-radius : 5px;
@@ -73,6 +73,6 @@ form button{
     font-size: larger;
     cursor : pointer;
 }
-form a{
+.Authform a{
     text-decoration : none;
 }

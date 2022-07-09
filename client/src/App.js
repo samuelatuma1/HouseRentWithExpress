@@ -10,19 +10,18 @@ import {
 // Pages
 import SignUpPage from './pages/auth/signup.js'
 import SignInPage from './pages/auth/signin.js'
+import AdminCity from  './pages/admin/adminCity'
 
 import  SetUser from './components/changeUser';
 import SetDefault from './components/defaultUser.js'
 
-function App(){
-  // let [test, setTest] = useState(null)
-
-    
+function App(){    
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/signup' element={<SignUpPage />} />
         <Route path='/signin' element={<SignInPage />} />
+        <Route path="/admin/city" element={<AdminCity />} />
       </Routes>
     </BrowserRouter>
    
