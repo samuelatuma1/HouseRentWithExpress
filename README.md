@@ -57,6 +57,7 @@
 
 #### Admin EndPoints
 <ul>
+    
     * @method POST /admin/city
     * @desc adds new city in City Collection.
     * @access PRIVATE
@@ -79,12 +80,13 @@
 </ul>
 
 <ul>
+    
     * @method GET /city/
     * @returns all added cities sorted first by country, then by state, lastly by cityId
 
     ------------------------------------------------------------------------------------------------
-    * @method GET /admin/city
-    * @returns all cities in database
+    * @method GET /admin/city/:id
+    * @returns all city in database matching :id OR 404
 </ul>
 
 <ul>
@@ -102,6 +104,7 @@
 </ul>
 
 <ul>
+    
     * @route /search?by=${String}&search=${String}/
     * @desc searches the City model 
     * @method GET

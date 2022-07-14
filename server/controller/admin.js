@@ -88,7 +88,7 @@ async function updateCityController(req, res){
     delete updateProperties["_id"]
     delete updateProperties["__v"]
 
-    // Update property
+    // Update City
     const updateCity = await City.findByIdAndUpdate(id, updateProperties)
     if(!updateCity)
         return res.sendStatus(404);
@@ -97,9 +97,9 @@ async function updateCityController(req, res){
 
 /**
  * 
- * @param {*} req 
- * @param {*} res 
- * @returns 
+ * @method GET /admin/city/:id
+ * @returns all city in database matching :id OR 404
+ * 
 */
 async function getCity(req, res){
     const cityId = await City.findById(req.params.id)
@@ -124,7 +124,7 @@ async function deleteCityController(req, res){
 }
 
 /**
- * @route /search?by=${String}/
+ * @route /search?by=${String}&search=${String}/
  * @desc searches the City model 
  * @method GET
  * @access PRIVATE
@@ -170,7 +170,7 @@ async function searchCity(req, res){
     return res.json(results)
 }
 
-
+// 
 function validateIsAdmin(req, res){
     return res.sendStatus(200)
 }
