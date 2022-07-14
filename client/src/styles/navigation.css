@@ -5,6 +5,7 @@ nav{
     padding: 1rem;
     transition: 0.5s;
     border-radius: 0px 0px 10px 10px;
+    margin-bottom: 10px;
 }
 
 nav:hover{

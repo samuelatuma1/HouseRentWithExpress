@@ -23,6 +23,10 @@ app.options("*", cors(corsOptions))
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
+// Import cookieParser for storing jwt in cookies
+const cookieParser = require("cookie-parser")
+// Used for accessing cookies
+app.use(cookieParser())
 
 // Routes
 // Auth Route

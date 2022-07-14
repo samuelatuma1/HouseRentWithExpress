@@ -1,6 +1,9 @@
 const {check, validationResult} = require("express-validator")
 const User = require('../models/usermodel.js')
 const jwt = require("jsonwebtoken")
+
+
+
 require("dotenv").config()
 const crypto = require("crypto")
 /**
@@ -52,11 +55,12 @@ const SignUpController = async (req, res) => {
         console.log(saveUser)
         
         // Tokenize ID
-
         let usertoken = signToken(saveUser._id)
         saveUser.token = usertoken
-        let { email, fullName, token } = saveUser 
-        return res.status(201).json({ email, fullName, token })
+        // Set token in cookie
+        res.cookie("token", usertoken)
+        let { email, fullName, token, isAdmin } = saveUser 
+        return res.status(201).json({ email, fullName, token, isAdmin  })
 
 
 
@@ -84,9 +88,13 @@ async function SignInController (req, res){
             // Sign token for user
             const token = signToken(user._id)
 
+            // Set token in cookie
+            res.cookie("token", token)
+
+
             // Send the email, fullName and token back
             
-            return res.json({email, fullName: user.fullName, token})
+            return res.json({email, fullName: user.fullName, token, isAdmin: user.isAdmin})
         }
     }
     // If user does not exist or password does not match, create a nullObject

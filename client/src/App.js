@@ -10,7 +10,10 @@ import {
 // Pages
 import SignUpPage from './pages/auth/signup.js'
 import SignInPage from './pages/auth/signin.js'
-import AdminCity from  './pages/admin/adminCity'
+
+// Admin Pages
+import AdminCity from  './pages/admin/city/adminCity'
+import GetCity from  './pages/admin/city/getCity';
 
 import  SetUser from './components/changeUser';
 import SetDefault from './components/defaultUser.js'
@@ -21,7 +24,9 @@ function App(){
       <Routes>
         <Route path='/signup' element={<SignUpPage />} />
         <Route path='/signin' element={<SignInPage />} />
+        {/* <Route path='/signin/:next' element={<SignInPage />} /> */}
         <Route path="/admin/city" element={<AdminCity />} />
+        <Route path="/admin/city/:id" element={<GetCity />} />
       </Routes>
     </BrowserRouter>
    

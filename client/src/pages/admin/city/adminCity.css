@@ -1,0 +1,101 @@
+/* Mobile first design */
+.adminCityForm{
+    display: flex;
+    justify-content: center;
+    
+}
+.adminCityForm input, .adminCityForm button,  .adminCityForm select{
+    border: 0px;
+    padding: 10px;
+    border-radius: 10px;
+    /* border: 1px solid rgb(208, 206, 206); */
+    margin: 1px;
+    transition: 0.5s linear;
+}
+.adminCityForm input{
+    flex-grow: 2;
+    box-shadow: 0px 0px 5px 0px rgb(210, 209, 209);
+    min-width: 300px;
+    outline: 0;
+}
+.adminCityForm button{
+    flex-grow: 1;    
+    background-color : var(--success, teal);
+    cursor: pointer;
+}
+
+.adminCityForm button:hover{
+    box-shadow: 0px 0px 5px 0px var(--success, teal);
+}
+.adminCityForm .inputErr::before{
+    content: "*"
+}
+.adminCityForm .inputErr{
+    color: red;
+}
+
+
+/* For cities table */
+.cityDiv {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.cityDiv table{
+    min-width: 350px;
+    box-shadow: 0px 0px 10px 1px rgb(223, 219, 219);
+    padding: 20px;
+    
+    border-radius: 20px;
+    transition: 0.9s linear;
+    cursor: pointer;
+    /* border-collapse: collapse; */
+    border-spacing: 0 10px ;
+    /* Control size of table */
+    max-height: 60vh;
+    overflow-y: scroll;
+    
+    
+  }
+  
+  .cityDiv table:hover{
+    box-shadow: 0px 0px 20px 1px rgb(150, 147, 147);
+    border-radius: 30px;
+    
+  }
+  td, th{
+    padding: 10px;
+    text-align: center;
+    transition: 0.5s linear;
+  }
+  .cityDiv tBody tr:nth-child(2n - 1){
+    
+    background-color: rgb(245, 240, 240);
+  }
+  
+  .cityDiv tBody tr:hover{
+    background-color: aliceblue;
+    border-radius: 20px;
+  }
+
+
+.toggleAddCityView {
+  padding: 10px;
+  border-bottom: 1px solid rgb(223, 216, 216);
+  margin: 10px 0px;
+  text-indent: 50px;
+}
+.hide{
+  display: none;
+}
+.desc{
+  padding: 10px;
+  text-indent: 50px;
+  
+  margin: 10px 0px;
+}
+ 
+  

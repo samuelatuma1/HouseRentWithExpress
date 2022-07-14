@@ -10,9 +10,21 @@ import  {useSetRecoilState} from "recoil";
 
 // Routing tool
 
-import {Link, useNavigate} from 'react-router-dom'
-
+import {Link, useNavigate, useParams, useSearchParams} from 'react-router-dom'
+/**
+ * @param ?next=SomeValue
+ * @param {*} props 
+ * @returns 
+ */
 function SignInForm(props){
+
+    const params = useParams()
+    const [searchParams, setSearchParams] = useSearchParams()
+
+    // Navigates users to actual page they visited if 
+    // signed in correctly
+    const next = searchParams.get("next")
+    
     
     // Organize All form Data 
     const [formData, setFormData] = useState({
@@ -69,11 +81,23 @@ function SignInForm(props){
             StoreUser(signInRes)
             
             // Redirect to home page
-            navigate("/home")
+            // Redirect to next if any
+            if(next){
+                // Navigates users to actual page they visited if 
+                // signed in correctly
+                navigate(next)
+            } else{
+                navigate("/home")
+            }
+            
+    } else{
+        // If server sends a 404 response
+        setFormErrs([{"msg": "email or password invalid"}])
     }
+
 }
 
-
+    
     return (
         <form onSubmit={submitUserForm} className="Authform">
             <h1>Sign In to House Rent</h1>

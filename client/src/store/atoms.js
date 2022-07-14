@@ -16,11 +16,7 @@ const User = atom({
     key: "User",
     default: localStorage.getItem("user") ? 
         JSON.parse(localStorage.getItem("user")) :
-        {
-            fullName: null,
-            email: null,
-            token: null
-        }
+        null
 })
 
 /**
@@ -35,8 +31,15 @@ const User = atom({
  */
 const SetUser = selector({
     key: "SelectUser",
+    /**
+     * @desc Returns user either stored in User Global State || Local Storal Storage
+     */
     get: (({get}) => {
-        let user = get(User)
+        const lsUser = localStorage.getItem("user") ? 
+                        JSON.parse(localStorage.getItem("user")) 
+                        : null
+        let user = get(User) || lsUser
+    
         return user
     }),
     set: ({get, set}, newUser) => {
@@ -62,7 +65,7 @@ const Users = atom({
 const AddUser = selector({
     key: "AddUsers",
     get: ({get}) => {
-        const allUsers = get(Users)
+        const allUsers = get(Users) 
         return allUsers
     },
     set: ({get, set}, newVal = 'NewUser') => {
