@@ -1,51 +1,67 @@
 const mongoose = require("mongoose")
 
 const HouseSchema = new mongoose.Schema({
-    houseAddress: {
-        streetAddress: {
-            type: String,
-            required: true
-                },
-        // city, state and country
-        // 
-        city: {
-            type: mongoose.ObjectId,
-            ref: "City"
-        }
+    // Add user 
+    //*************************************************
+    // Bare Essentials to Create a house Upload
+    uploadedBy: {
+        type: mongoose.ObjectId,
+        ref: "User",
+        required: true
     },
-    size: {
-        type: Number
+    // houseAddress: 
+    streetAddress: {
+        type: String,
+        required: true
     },
+    // city, state and country
+    city: {
+        type: mongoose.ObjectId,
+        ref: "City"
+    },
+    // End of House Address
+    
     bedrooms: {
         type: Number,
     },
     bathrooms: {
         type: Number
     },
+    /**
+     * @desc Property Description
+     */
     description: {
         type: String
     },
-    rent: {
-        amount: {
-            type: Number,
-            min: 0
-        },
-        rentPaid: {
-            enum: ["weekly", "monthly", "per anum"],  
-        },
+    
+    // *************************************************
+    size: {
+        type: Number
     },
-    leaseDuration: {
-        duration: {
-            type: Number,
-            max: 10,
-            default: 1
-        },
-        period: {
-            type: String,
-            enum: ["week", "month", "year"],
-            default: "year"
-        }
+    // Rent Details
+    amount: {
+        type: Number,
+        min: 0
     },
+    rentPaid: {
+        type: String,
+        enum: ["weekly", "monthly", "per annum"],  
+        default: "per annum"
+    },
+    
+    // leaseDuration
+    duration: {
+        type: Number,
+        max: 10,
+        default: 1
+    },
+    period: {
+        type: String,
+        enum: ["week", "month", "year"],
+        default: "year"
+    },
+    // End of Lease Duration
+    
     leaseDescription: {
         type: String
     },
@@ -54,32 +70,32 @@ const HouseSchema = new mongoose.Schema({
         type: [mongoose.ObjectId],
         ref: 'HouseImg'
     },
+    // listedBy
     listedBy: {
-        listedBy: {
-            type: String,
-            enum: ["owner", "management company", "tenant"]
-        },
-        name: {
-            type: String
-        },
-        phone: {
-            type: String,
-            validate: {
-                validator: (val) => {
-                    // If includes +, must be at the beginning alone
-                    const accept = "0123456789 +()"
-                    for(let char of val){
-                        if(!accept.includes(char)){
-                            return false
-                        }
+        type: String,
+        enum: ["owner", "management company", "tenant"]
+    },
+    name: {
+        type: String
+    },
+    phone: {
+        type: String,
+        validate: {
+            validator: (val) => {
+                // If includes +, must be at the beginning alone
+                const accept = "0123456789 +()"
+                for(let char of val){
+                    if(!accept.includes(char)){
+                        return false
                     }
-                    return true
-                },
+                }
+                return true
+            },
 
-            message: "Please, include a valid phone Number"
-            }
+        message: "Please, include a valid phone Number"
         }
     },
+    // End of Listed By
     availabilityForInspection: {
         dayAndTime: [{
             day: {
@@ -98,6 +114,10 @@ const HouseSchema = new mongoose.Schema({
         default: true
     }
 
+}, {
+    //  Strict allows only values in the schema to be saved
+    strict: true,
+    timestamps: true
 })
 
 

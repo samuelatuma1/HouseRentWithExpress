@@ -2,9 +2,12 @@ const express = require('express');
 const uploadImg = require("../middlewares/houseFileUploadHandler.js")
 const houseRoute = express.Router()
 
+// Middlewares
+const {validateToken} = require("../middlewares/tokenMiddleWare")
+
 
 // Import Controllers
-const {uploadHouse} = require("../controller/house")
+const {uploadHouse, updateUploadedHouse} = require("../controller/house")
 
 // Import Validation middleware
 const {houseUploadValidation} = require("../middlewares/houseUploadValidation")
@@ -12,7 +15,12 @@ const {houseUploadValidation} = require("../middlewares/houseUploadValidation")
 const houseUploadFilesForm = uploadImg.fields([
     {name: "houseImg", maxCount: 10}
 ])
+
+
 houseRoute.route("/upload")
-            .post(houseUploadFilesForm, houseUploadValidation, uploadHouse)
+            .post(validateToken, houseUploadFilesForm, houseUploadValidation, uploadHouse)
+
+houseRoute.route("/upload/:houseId")
+    .put(validateToken, houseUploadFilesForm, houseUploadValidation, updateUploadedHouse)
     
 module.exports = houseRoute

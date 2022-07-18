@@ -32,7 +32,8 @@ const User = atom({
 const SetUser = selector({
     key: "SelectUser",
     /**
-     * @desc Returns user either stored in User Global State || Local Storal Storage
+     * @desc Returns user either stored in User Global State || user stored in Local Storal Storage
+     * 
      */
     get: (({get}) => {
         const lsUser = localStorage.getItem("user") ? 

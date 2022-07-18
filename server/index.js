@@ -49,7 +49,6 @@ const path = require("path")
 // Set up
 
 
-
 const upload = require("./middlewares/houseFileUploadHandler")
 
 // Test out Multer on upload route
@@ -65,6 +64,7 @@ app.post("/upload", upload.fields([
     return res.json("sha256")
 })
 
+app.get("*", (req, res) => res.json({msg: `invalid path ${req.url}`}))
 //  Listening on PORT
 const PORT = process.env.PORT || 8080
 app.listen(PORT, () => console.log(`App running on PORT ${PORT}`))

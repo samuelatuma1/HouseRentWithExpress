@@ -79,9 +79,22 @@ async function createPost(){
     }
     console.log(await myFirstPost.fill)
 }
-createPost()
+// createPost()
 // async function getUsers(){
 //     const allUsers =  await User.where()
 //     console.log(allUsers)
 // }
+
 // getUsers()
+
+function allUsers(){
+    User.find({}, async (err, all) => {
+        
+        let users = all.map(user => {
+            user['longName']='Samuel Atuma Okpara Saake';
+            // console.log(user)
+            return user
+        })
+    })
+}
+allUsers()

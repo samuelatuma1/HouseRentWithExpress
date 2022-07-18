@@ -1,22 +1,24 @@
-const {check} = require("express-validator");
+const {check, body} = require("express-validator");
 
 const houseUploadValidation = [
-    check("streetAddress").isLength({min: 1})
+    check("streetAddress").if(body("streetAddress").exists()).trim().isLength({min: 1})
         .withMessage("Please include a valid street address"),
-    check("bedrooms").isNumeric(),
-    check("bathrooms").isNumeric(),
-    check("description").isLength({min: 2}),
-    check("amount").isNumeric(),
-    check("rentPaid").isLength({min: 3}),
-    check("listedBy").custom((val, {req}) => {
+    check("city").if(body("city").exists()).trim().isLength({min: 1}),
+    check("bedrooms").if(body("bedrooms").exists()).isNumeric(),
+    check("bathrooms").if(body("bathrooms").exists()).isNumeric(),
+    check("description").if(body("description").exists()).trim().isLength({min: 2}),
+    // Necessary for the next Section
+    check("amount").if(body("amount").exists()).isNumeric(),
+    check("rentPaid").if(body("rentPaid").exists()).isLength({min: 3}),
+    check("listedBy").if(body("listedBy").exists()).custom((val, {req}) => {
         const accepted = ["owner", "management company", "tenant"]
         if(accepted.includes(val.toLowerCase()))
             return val;
-        throw new Error('value must be one of ["owner", "management company", "tenant"]')
+        throw new Error(`value must be one of ['owner', 'management company', 'tenant']`)
     }),
-    check("name").isLength({min: 1}).trim().not().isEmpty()
+    check("name").if(body("name").exists()).trim().isLength({min: 1}).trim().not().isEmpty()
        .withMessage("Please, include a valid name"),
-    check("phone")
+    check("phone").if(body("phone").exists())
         .isLength({min: 10})
         .custom((val, {req}) => {
         const accept = "0123456789 +()"
@@ -27,7 +29,7 @@ const houseUploadValidation = [
                     }
                     return val
     }),
-    check("availabilityForInspection")
+    check("availabilityForInspection").if(body("availabilityForInspection").exists())
         .isArray()
 ]
 
