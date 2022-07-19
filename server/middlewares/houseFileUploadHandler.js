@@ -12,8 +12,8 @@ const storage = multer.diskStorage({
         // Set name for file when stored in destination
         // Get mimetype (To extract file extension from it)
             // Example mimetype => "image/png"
-        const mimetype = file.mimetype.split("/")[1]
-        const fileName = `houseUpload-${Date.now()}-${Math.floor(Math.random() * 10000000000)}-${mimetype}`
+        const extension = file.mimetype.split("/")[1]
+        const fileName = `houseUpload-${Date.now()}-${Math.floor(Math.random() * 10000000000)}.${extension}`
         return callBack(null, fileName)
     }
 })

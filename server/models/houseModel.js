@@ -68,7 +68,8 @@ const HouseSchema = new mongoose.Schema({
     // Images media url
     photos: {
         type: [mongoose.ObjectId],
-        ref: 'HouseImg'
+        ref: 'HouseImg',
+        default: []
     },
     // listedBy
     listedBy: {
@@ -130,7 +131,14 @@ const HouseImgSchema = new mongoose.Schema({
         type: mongoose.ObjectId,
         required: true,
         ref: "House"
+    },
+    description: {
+        type: String,
+        default: ""
     }
+}, {
+    strict: true,
+    timestamps: true
 })
 
 const CitySchema = new mongoose.Schema({
