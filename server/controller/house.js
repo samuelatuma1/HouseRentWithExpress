@@ -120,7 +120,7 @@ async function updateUploadedHouse(req, res){
  * @desc Adds images to a House.
  * @ACCESS PROTECTED requires Login
  * @payload multipart-formdata {
-        *  profilePic : fileField (Accepts up to 8)
+        *  houseImg : fileField (Accepts up to 8)
         * description?: String
         * }
         *
@@ -154,13 +154,19 @@ async function uploadHouseImage(req, res){
 
         return res.status(201).json({imgFor: imgFor.toObject()})
     } catch(err){
+        console.log(err)
         return res.sendStatus(500)
     }
 }
 
 /**
  * @method DELETE /house/houseImgs/:imgId
- * @param {*} req 
+ * @desc deletes Image Object with imgId, removes imgUrl from house, deletes image file
+ * @ACCESS Protected , Requires Login
+ * @param {
+ *      reqParams = {imgId: mongoose.ObjectId},
+ *      resBody = {}, reqBody = {}, reqQuery = {}, locals = {}
+ * } req 
  * @param {*} res 
  * @returns 
  */
@@ -196,7 +202,8 @@ async function deleteSelectedImg(req, res) {
         console.log("removed file", imgFilePath)
         console.log("File deleted => ", deletCount)
         // Remove image url from house
-        return res.json({img: img.toObject(), house: imgFor.toObject()})
+        return res.sendStatus(204)
+        // return res.json({img: img.toObject(), house: imgFor.toObject()})
     } catch(err){
         console.log(err)
         return res.status(500).json({err: "An error occured"})

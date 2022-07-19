@@ -49,22 +49,7 @@ const path = require("path")
 // Set up
 
 
-const upload = require("./middlewares/houseFileUploadHandler")
-
-// Test out Multer on upload route
-app.post("/upload", upload.fields([
-    {name: "profilePic", maxCount: 2}
-]), (req, res) => {
-    const imgUrls = []
-    for(let fileName  in req.files) {
-        const files = req.files[fileName]
-        for(let fileData of files){
-            imgUrls.push(fileData.path)
-            console.log('filepath => ', fileData.path)
-        }
-    }
-    return res.send(imgUrls)
-})
+// Serve static files from /media
 app.use("/media", express.static("media"))
 app.get("*", (req, res) => res.json({msg: `invalid path ${req.url}`}))
 //  Listening on PORT

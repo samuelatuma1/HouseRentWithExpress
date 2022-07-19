@@ -126,3 +126,84 @@
     }]
 </ul>
 
+
+#### House Endpoints
+<ul>
+   
+    #### @method POST /house/upload
+    * @ACCESS PRIVATE requires Login
+    * @param { Request <reqParams = {}, 
+    *                  resBody = {},
+    *                  reqBody = {
+    *                      streetAddress: String,
+    *                      city: mongoose.ObjectId
+    *                             
+    *                      size?: String,
+    *                      bedrooms: Number,
+    *                      bathrooms: Number,
+    *                      description: String,
+    *                   }
+    *                  reqQuery = {},
+    *                  locals = {}
+    * >} req 
+    * @returns HouseObject {
+                  _id: mongoose.ObjectId
+                  streetAddress: String,
+    *             city: mongoose.ObjectId            
+    *             size: String,
+    *             bedrooms: Number,
+    *             bathrooms: Number,
+    *             description: String,
+    *             ...
+    *   }
+    * @error 400, 500
+
+    #### @method PUT /house/upload/:houseId
+    * @desc Updates House with id matching :houseId with req.body . Validates field before updating
+    * @ACCESS PRIVATE, requires Login
+    * @param { Request <reqParams = {}, 
+    *                  resBody = {},
+    *                  reqBody = {
+    *                      ...House Model
+    *                   }
+    *                  reqQuery = {},
+    *                  locals = {}
+    * >} req 
+    *   
+    * @returns HouseObject {
+    *             _id: mongoose.ObjectId
+    *             streetAddress: String,
+    *             city: mongoose.ObjectId            
+    *             size: String,
+    *             bedrooms: Number,
+    *             bathrooms: Number,
+    *             description: String,
+    *             ...
+    *   }
+ 
+    #### @method POST /house/uploadimg/:houseId
+    * @desc Adds images to a House.
+    * @ACCESS PROTECTED requires Login
+    * @payload multipart-formdata {
+            *  houseImg : fileField (Accepts up to 8)
+            * description?: String
+            * }
+    * @returns ImageObject {
+        _id: mongoose.ObjectId
+        imgUrl : "media\houseUpload-1658164013354-9085146157.png"
+        houseId: mongoose.ObjectId
+        description: String
+        createdAt: DateTime
+        updatedAt: DateTime
+    }
+
+
+    ### @method DELETE /house/houseImgs/:imgId
+    * @ACCESS Protected , Requires Login
+    * @param Request {
+            reqParams = {imgId: mongoose.ObjectId}
+        } req 
+    * @param {*} res 
+    * @returns 204
+    @errors 500 {err: "An error occured"}, (403) {err: "Image not uploaded by you"}
+</ul>
