@@ -11,6 +11,9 @@ import {
 import SignUpPage from './pages/auth/signup.js'
 import SignInPage from './pages/auth/signin.js'
 
+// House pages
+import UploadHouse from "./pages/house/upload.js"
+
 // Admin Pages
 import AdminCity from  './pages/admin/city/adminCity'
 import GetCity from  './pages/admin/city/getCity';
@@ -27,6 +30,7 @@ function App(){
         {/* <Route path='/signin/:next' element={<SignInPage />} /> */}
         <Route path="/admin/city" element={<AdminCity />} />
         <Route path="/admin/city/:id" element={<GetCity />} />
+        <Route path="/uploadHouse" element={<UploadHouse />} />
       </Routes>
     </BrowserRouter>
    

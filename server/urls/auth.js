@@ -1,6 +1,6 @@
 const express = require("express")
 const auth= express.Router()
-const {SignUpController, SignInController} = require("../controller/auth.js")
+const {SignUpController, SignInController, isAuthenticated} = require("../controller/auth.js")
 const User = require('../models/usermodel.js')
 
 // Middle wares
@@ -10,7 +10,7 @@ auth.route("/signup").post(UserSignUpValidation, SignUpController)
 
 auth.route("/signin").post(SignInController)
 
-
+auth.get("/isAuthenticated", isAuthenticated )
 
 
 auth.get("/data", validateToken,async function(req, res){

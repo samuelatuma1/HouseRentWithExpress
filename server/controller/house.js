@@ -174,7 +174,9 @@ async function deleteSelectedImg(req, res) {
     try{
         const imgId = req.params.imgId
         const img = await HouseImg.findById(imgId)
-
+        if(!img){
+            res.sendStatus(404)
+        }
         // Get house it is linked to
         const imgFor = await House.findById(img.houseId)
         // Ensure that house is uploaded by the user

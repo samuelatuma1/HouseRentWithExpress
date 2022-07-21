@@ -2,6 +2,21 @@
 ## This Project is built with
     - Node.js, Express.js, React.js, MongoDB, JWT
 
+## DEPENDENCIES
+    "chai": "^4.3.6",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "express-graphql": "^0.12.0",
+    "express-session": "^1.17.3",
+    "express-validator": "^6.14.2",
+    "graphql": "^16.5.0",
+    "jsonwebtoken": "^8.5.1",
+    "mocha": "^10.0.0",
+    "mongoose": "^6.4.0",
+    "multer": "^1.4.5-lts.1"
+
+
 ## API Documentation
 
 ### EndPoints
@@ -200,10 +215,11 @@
 
     ### @method DELETE /house/houseImgs/:imgId
     * @ACCESS Protected , Requires Login
+     * @desc deletes Image Object with imgId, removes imgUrl from house, deletes image file
     * @param Request {
             reqParams = {imgId: mongoose.ObjectId}
         } req 
     * @param {*} res 
     * @returns 204
-    @errors 500 {err: "An error occured"}, (403) {err: "Image not uploaded by you"}
+    @errors 500 {err: "An error occured"}, (403) {err: "Image not uploaded by you"}, 404
 </ul>

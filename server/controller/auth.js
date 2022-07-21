@@ -24,6 +24,7 @@ function hashData(data){
             .update(data).digest('hex')
 }
 
+
 /**
  * @desc Signs up a User 
  * @route POST /auth/signup
@@ -103,4 +104,34 @@ async function SignInController (req, res){
 }
 
 
-module.exports = {SignUpController, SignInController}
+/**
+ * @desc checks if user is signed in.
+ * @returns 200 {"isAuthenticated": Boolean} depending on if user is signed in or not
+ */
+async function isAuthenticated(req, res){
+   try{
+     // Check cookie for token
+     const token = req.cookies.token
+     console.log({token: token})
+     let isAuthenticated = false
+     if(!token){
+         return res.json({isAuthenticated})
+     }
+ 
+     // Decrypt token
+     jwt.verify(token, process.env.JWT_TOKEN, async (err, decryptedData) => {
+         const {userId} = decryptedData
+         const user = await User.findById(userId)
+         if(user)
+            return res.json({isAuthenticated: true});
+        
+        return res.json({isAuthenticated: true});
+
+     })
+   } catch(err){
+    return res.json({isAuthenticated : false})
+   }
+}
+
+
+module.exports = {SignUpController, SignInController, isAuthenticated}
