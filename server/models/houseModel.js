@@ -19,6 +19,11 @@ const HouseSchema = new mongoose.Schema({
         type: mongoose.ObjectId,
         ref: "City"
     },
+    propertyType: {
+        type: String,
+        enum: ["house", "condo", "townhouse", "entire apartment"],
+        default: "house"
+    },
     // End of House Address
     
     bedrooms: {
@@ -26,6 +31,10 @@ const HouseSchema = new mongoose.Schema({
     },
     bathrooms: {
         type: Number
+    },
+    amenities: {
+        type: Array,
+        default: []
     },
     /**
      * @desc Property Description
@@ -36,35 +45,41 @@ const HouseSchema = new mongoose.Schema({
     
     // *************************************************
     size: {
-        type: Number
+        type: String
     },
-    // Rent Details
+    // Listing Details
     amount: {
         type: Number,
         min: 0
     },
     rentPaid: {
         type: String,
-        enum: ["weekly", "monthly", "per annum"],  
-        default: "per annum"
+        enum: ["week", "month", "per annum", "annum"],  
+        default: "annum"
     },
-    
-    // leaseDuration
-    duration: {
+    securityDeposit: {
         type: Number,
-        max: 10,
-        default: 1
+        default: 0
+    },
+    availableForRent: {
+        type: Boolean,
+        default: true
+    }, 
+    // lease
+    duration: {
+        type: String,
+        default: '1 month'
     },
     period: {
         type: String,
         enum: ["week", "month", "year"],
         default: "year"
     },
-    // End of Lease Duration
-    
     leaseDescription: {
         type: String
     },
+    // End of Lease 
+    
     // Images media url
     photos: {
         type: [mongoose.ObjectId],
@@ -110,10 +125,7 @@ const HouseSchema = new mongoose.Schema({
         }]
     },
 
-    availabileForRent: {
-        type: Boolean,
-        default: true
-    }
+    
 
 }, {
     //  Strict allows only values in the schema to be saved
@@ -127,6 +139,10 @@ const HouseImgSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    imgPath : {
+        type: String,
+        required: true
+    },
     houseId: {
         type: mongoose.ObjectId,
         required: true,
@@ -135,7 +151,8 @@ const HouseImgSchema = new mongoose.Schema({
     description: {
         type: String,
         default: ""
-    }
+    },
+    
 }, {
     strict: true,
     timestamps: true
@@ -161,7 +178,7 @@ const CitySchema = new mongoose.Schema({
 
 /**
  * 
- * @returns sorted City Collection firt by country, then by state and finally city
+ * @returns sorted City Collection first by country, then by state and finally city
  */
 CitySchema.query.sortResult = function(){
     return this.sort({country: 1, state: 1, city: 1})

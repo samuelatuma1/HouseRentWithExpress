@@ -10,9 +10,9 @@ import {
 // Pages
 import SignUpPage from './pages/auth/signup.js'
 import SignInPage from './pages/auth/signin.js'
-
 // House pages
-import UploadHouse from "./pages/house/upload.js"
+import UploadHouse from "./pages/house/uploadHouse/upload.js";
+import UpdateHouse from './pages/house/updateHouse/updateHouse.js';
 
 // Admin Pages
 import AdminCity from  './pages/admin/city/adminCity'
@@ -30,7 +30,8 @@ function App(){
         {/* <Route path='/signin/:next' element={<SignInPage />} /> */}
         <Route path="/admin/city" element={<AdminCity />} />
         <Route path="/admin/city/:id" element={<GetCity />} />
-        <Route path="/uploadHouse" element={<UploadHouse />} />
+        <Route path="/house/upload" element={<UploadHouse />} />
+        <Route path="house/update/:houseId" element={<UpdateHouse />} />
       </Routes>
     </BrowserRouter>
    

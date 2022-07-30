@@ -151,12 +151,7 @@
     *                  resBody = {},
     *                  reqBody = {
     *                      streetAddress: String,
-    *                      city: mongoose.ObjectId
-    *                             
-    *                      size?: String,
-    *                      bedrooms: Number,
-    *                      bathrooms: Number,
-    *                      description: String,
+    *                      propertyType: String
     *                   }
     *                  reqQuery = {},
     *                  locals = {}
@@ -164,11 +159,8 @@
     * @returns HouseObject {
                   _id: mongoose.ObjectId
                   streetAddress: String,
-    *             city: mongoose.ObjectId            
-    *             size: String,
-    *             bedrooms: Number,
-    *             bathrooms: Number,
-    *             description: String,
+    *             propertyType: String,
+    *             uploadedBy: mongoose.ObjectId
     *             ...
     *   }
     * @error 400, 500
@@ -195,7 +187,23 @@
     *             description: String,
     *             ...
     *   }
- 
+    *
+    #### @method GET /house/upload/:houseId
+    * @desc Gets House with id matching :houseId with req.body uploaded by signed in user
+    * @ACCESS PRIVATE, requires Login
+    * @param {Params = {houseId: mongoose.ObjectId}} req 
+    * @returns {
+    *             _id: mongoose.ObjectId
+    *             streetAddress: String,
+    *             city: mongoose.ObjectId            
+    *             size: String,
+    *             bedrooms: Number,
+    *             bathrooms: Number,
+    *             description: String,
+    *             ...
+    *   } || status code 403 or 404 or 500
+
+
     #### @method POST /house/uploadimg/:houseId
     * @desc Adds images to a House.
     * @ACCESS PROTECTED requires Login
@@ -205,13 +213,29 @@
             * }
     * @returns ImageObject {
         _id: mongoose.ObjectId
-        imgUrl : "media\houseUpload-1658164013354-9085146157.png"
+        imgUrl : path String,
+        imgPath: path String,
         houseId: mongoose.ObjectId
         description: String
         createdAt: DateTime
         updatedAt: DateTime
     }
 
+
+    #### @method GET /house/houseimgs/:houseId
+    * @desc returns HouseImg Objects for house with :houseId
+    * @param {<req.Params = {houseId: mongoose.ObjectId} res.body={} req.body={}
+    *          req.query={}, req.locals={}>} req
+    * @returns {Array<{
+        _id: mongoose.ObjectId
+        imgUrl : path String,
+        imgPath: path String,
+        houseId: mongoose.ObjectId
+        description: String
+        createdAt: DateTime
+        updatedAt: DateTime
+    }>} 
+ 
 
     ### @method DELETE /house/houseImgs/:imgId
     * @ACCESS Protected , Requires Login
@@ -222,4 +246,10 @@
     * @param {*} res 
     * @returns 204
     @errors 500 {err: "An error occured"}, (403) {err: "Image not uploaded by you"}, 404
+
+    ### @method PUT /house/houseImgs/:imgId
+    * @desc Updates description for ImageObject
+    * @param {Param= {imgId: mongoose.ObjectId}, 
+    *          res.body ={}, req.body={description: String}, req.query={}, req.locals={}} req
+    * @returns statusCode(204), 403, 404, 500
 </ul>

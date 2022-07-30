@@ -10,15 +10,22 @@ const User = require('../models/usermodel.js')
  */
 const validateToken = (req, res, next) =>  {
     // Check if token in header or cookies
-    const header = req.headers.authorization
+    const header = req.headers.authorization 
+    console.log("cookies", req.cookies)
     console.log("token middle =>", req.cookies.token)
     if(!req.cookies.token && (!header || !header.includes("Bearer"))){
         return res.status(401).json({error: 'Invalid token: Token does not exist'})
     }
-
+    
     //get token from cookies or header
     const token = req.cookies.token || header.split(' ')[1]
 
+    // Add  token to cookie so if token comes in request header, it can be accessed
+    // ... via cookie in subsequent requests
+    res.cookie("token", token)
+
+    console.log("Token => ", token)
+    
     // Verify token
     jwt.verify(token, process.env.JWT_TOKEN, (err, decryptedData) => {
         if (err) 

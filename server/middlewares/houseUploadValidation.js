@@ -1,13 +1,21 @@
 const {check, body} = require("express-validator");
 
 const houseUploadValidation = [
-    check("streetAddress").if(body("streetAddress").exists()).trim().isLength({min: 1})
+    check("streetAddress").trim().isLength({min: 1})
         .withMessage("Please include a valid street address"),
-    check("city").if(body("city").exists()).trim().isLength({min: 1}),
+    check("propertyType").trim().isLength({min: 1}).custom((val, {req}) => {
+        const accepted = ["house", "condo", "townhouse", "entire apartment"]
+        const lowerCasedVal = val.toLowerCase()
+        if(!accepted.includes(lowerCasedVal))
+            throw new Error("Invalid property Type");
+        return val;
+    }),
+]
+
+const houseUpdateValidation = [
     check("bedrooms").if(body("bedrooms").exists()).isNumeric(),
     check("bathrooms").if(body("bathrooms").exists()).isNumeric(),
-    check("description").if(body("description").exists()).trim().isLength({min: 2}),
-    // Necessary for the next Section
+    check("description").if(body("description").exists()).trim().isLength({min: 0}),
     check("amount").if(body("amount").exists()).isNumeric(),
     check("rentPaid").if(body("rentPaid").exists()).isLength({min: 3}),
     check("listedBy").if(body("listedBy").exists()).custom((val, {req}) => {
@@ -34,5 +42,5 @@ const houseUploadValidation = [
 ]
 
 module.exports = {
-    houseUploadValidation
+    houseUploadValidation, houseUpdateValidation
 }

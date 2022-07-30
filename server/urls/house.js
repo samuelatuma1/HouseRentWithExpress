@@ -7,10 +7,10 @@ const {validateToken} = require("../middlewares/tokenMiddleWare")
 
 
 // Import Controllers
-const {uploadHouse, updateUploadedHouse, uploadHouseImage, getHouseImg, deleteSelectedImg} = require("../controller/house")
+const {uploadHouse, updateUploadedHouse, uploadHouseImage, getHouseImg, deleteSelectedImg, getHouse, updateSelectedImg} = require("../controller/house")
 
 // Import Validation middleware
-const {houseUploadValidation} = require("../middlewares/houseUploadValidation")
+const {houseUploadValidation,  houseUpdateValidation} = require("../middlewares/houseUploadValidation")
 //  House Upload file fields
 const houseUploadFilesForm = uploadImg.fields([
     {name: "houseImg", maxCount: 10}
@@ -21,16 +21,19 @@ houseRoute.route("/upload")
             .post(validateToken, houseUploadFilesForm, houseUploadValidation, uploadHouse)
 
 houseRoute.route("/upload/:houseId")
-    .put(validateToken, houseUploadFilesForm, houseUploadValidation, updateUploadedHouse)
+    .get(validateToken, getHouse)
+    .put(validateToken, houseUploadFilesForm,  houseUpdateValidation, updateUploadedHouse)
 
 
 houseRoute.route("/uploadimg/:houseId")
     .post(validateToken, houseUploadFilesForm, uploadHouseImage)
 
-// houseRoute.route("/houseImgs/:houseId")
-//     .get(getHouseImg)
-houseRoute.route("/houseImgs/:imgId")
-    .delete(validateToken, houseUploadFilesForm, houseUploadValidation, deleteSelectedImg)
+houseRoute.route("/houseimgs/:houseId")
+    .get(getHouseImg)
+    
+houseRoute.route("/houseimgs/:imgId")
+    .put(validateToken, houseUploadFilesForm, houseUploadValidation, updateSelectedImg)
+    .delete(validateToken, deleteSelectedImg)
 
     
 module.exports = houseRoute

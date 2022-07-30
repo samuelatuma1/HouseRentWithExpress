@@ -1,0 +1,143 @@
+
+ #######################################################################################
+        Path: /upload
+
+        Request Body: {"email":"admin@mail.com","password":"12345A!","streetAddress":"My Street","propertyType":"costant"}
+        Request Query: {}
+        Request Params: {}
+        method: POST
+
+        Error: ValidationError: propertyType: `costant` is not a valid enum value for path `propertyType`.
+
+        ###################################################################################
+        
+
+ #######################################################################################
+        Path: /upload/62e0cbe3d3d389f7707e582e
+
+        Request Body: {"email":"admin@mail.com","password":"12345A!","streetAddress":"Amadi Street, Nigeria","propertyType":"condo"}
+        Request Query: {}
+        Request Params: {"houseId":"62e0cbe3d3d389f7707e582e"}
+        method: GET
+
+        Error: TypeError: Cannot read properties of null (reading 'uploadedBy')
+
+        ###################################################################################
+        
+
+ #######################################################################################
+        Path: /upload/62e0cbe3d3d389f7707e5825
+
+        Request Body: {"email":"admin@mail.com","password":"12345A!","streetAddress":"Amadi Street, Nigeria","propertyType":"condo"}
+        Request Query: {}
+        Request Params: {"houseId":"62e0cbe3d3d389f7707e5825"}
+        method: GET
+
+        Error: TypeError: Cannot read properties of null (reading 'uploadedBy')
+
+        ###################################################################################
+        
+
+ #######################################################################################
+        Path: /upload/62e0cbe3d3d389f7707e582
+
+        Request Body: {"email":"admin@mail.com","password":"12345A!","streetAddress":"Amadi Street, Nigeria","propertyType":"condo"}
+        Request Query: {}
+        Request Params: {"houseId":"62e0cbe3d3d389f7707e582"}
+        method: GET
+
+        Error: CastError: Cast to ObjectId failed for value "62e0cbe3d3d389f7707e582" (type string) at path "_id" for model "House"
+
+        ###################################################################################
+        
+
+ #######################################################################################
+        Path: /upload/62e0c247a6df704b40070179
+
+        Request Body: {}
+        Request Query: {}
+        Request Params: {"houseId":"62e0c247a6df704b40070179"}
+        method: GET
+
+        Error: TypeError: Cannot read properties of undefined (reading 'equals')
+
+        ###################################################################################
+        
+
+ #######################################################################################
+        Path: /upload/62e0c247a6df704b40070179
+
+        Request Body: {}
+        Request Query: {}
+        Request Params: {"houseId":"62e0c247a6df704b40070179"}
+        method: GET
+
+        Error: TypeError: houseObject.select is not a function
+
+        ###################################################################################
+        
+
+ #######################################################################################
+        Path: /upload/62e27efc17f140ff99ae9579
+
+        Request Body: {"duration":"6 months","leaseDescription":"No sokiking"}
+        Request Query: {}
+        Request Params: {"houseId":"62e27efc17f140ff99ae9579"}
+        method: PUT
+
+        Error: CastError: Cast to Number failed for value "6 months" (type string) at path "duration"
+
+        ###################################################################################
+        
+
+ #######################################################################################
+        Path: /upload/62e27efc17f140ff99ae9579
+
+        Request Body: {"duration":"6 months","leaseDescription":"Hello"}
+        Request Query: {}
+        Request Params: {"houseId":"62e27efc17f140ff99ae9579"}
+        method: PUT
+
+        Error: CastError: Cast to Number failed for value "6 months" (type string) at path "duration"
+
+        ###################################################################################
+        
+
+ #######################################################################################
+        Path: /upload
+
+        Request Body: {"streetAddress":"My new House at Okija Shrine","propertyType":"house"}
+        Request Query: {}
+        Request Params: {}
+        method: POST
+
+        Error: ValidationError: duration: Cast to Number failed for value "1 month" (type string) at path "duration"
+
+        ###################################################################################
+        
+
+ #######################################################################################
+        Path: /upload
+
+        Request Body: {"streetAddress":"My new House at Okija Shrine","propertyType":"house"}
+        Request Query: {}
+        Request Params: {}
+        method: POST
+
+        Error: ValidationError: duration: Cast to Number failed for value "1 month" (type string) at path "duration"
+
+        ###################################################################################
+        
+
+ #######################################################################################
+        Path: /upload
+
+        Request Body: {"streetAddress":"my new house","propertyType":"house"}
+        Request Query: {}
+        Request Params: {}
+        method: POST
+
+        Error: ValidationError: duration: Cast to Number failed for value "1 month" (type string) at path "duration"
+
+        ###################################################################################
+        
