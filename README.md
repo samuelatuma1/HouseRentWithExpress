@@ -252,4 +252,16 @@
     * @param {Param= {imgId: mongoose.ObjectId}, 
     *          res.body ={}, req.body={description: String}, req.query={}, req.locals={}} req
     * @returns statusCode(204), 403, 404, 500
+
+
+    ### @method GET /house/list/:houseId
+    * @desc lists house for subscribers to view 
+    * @ACCESS PRIVATE, requires Login
+    * @param { Request <reqParams = {houseId: mongoose.ObjectId}, 
+    *                  resBody = {}
+    *                  reqQuery = {},
+    *                  locals = {}
+    * >} req 
+    * @param {*} res 
+    * @returns 200 or 403 or 400
 </ul>

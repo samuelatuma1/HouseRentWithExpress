@@ -6,7 +6,6 @@ const {reportErr} = require("../utils/reportError.js")
 const {House, City, HouseImg} = require("../models/houseModel.js");
 
 const {validationResult} = require("express-validator");
-const { default: mongoose } = require("mongoose");
 
 // Functions for handling House Info
 
@@ -104,10 +103,15 @@ async function updateUploadedHouse(req, res){
         console.log("Response Data =>", responseData)
         return res.status(200).json(responseData)
     } catch(err){
+        console.log(err)
         reportErr(err, req)
         return res.sendStatus(500)
     }
 }
+
+
+
+
 
 /**
  * @method GET /house/upload/:houseId
@@ -309,6 +313,79 @@ async function updateSelectedImg(req, res) {
     }
 }
 
+
+function verifyHouseDetails(houseDetails){
+
+    // Ensure Listing Details are present
+    if(!houseDetails.amount || !houseDetails.rentPaid)
+        return false
+
+        
+    // Ensure Lease details are present
+    if(!houseDetails.duration)
+        return false
+        
+        
+    // Ensure personal details is present
+    if(!houseDetails.listedBy || !houseDetails.name || !houseDetails.email || !houseDetails.phone)
+        return false
+
+    return true
+    
+    
+}
+
+/**
+ * @method GET /house/list/:houseId
+ * @desc lists house for subscribers to view 
+ * @ACCESS PRIVATE, requires Login
+ * @param { Request <reqParams = {houseId: mongoose.ObjectId}, 
+ *                  resBody = {}
+ *                  reqQuery = {},
+ *                  locals = {}
+ * >} req 
+ * @param {*} res 
+ * @returns 200 or 403 or 400
+ */
+async function listHouse(req, res){
+    try{
+        const houseId = req.params.houseId
+        const userId = req.userId
+        
+        // Get house
+        const houseObject = await House.findById(houseId)
+        // Send a 404 bad request if user isn't uploader of house
+        if(!houseObject){
+            return res.sendStatus(404)
+        }
+        const isUploadedByUser = houseObject.uploadedBy.equals(userId)
+        if(!isUploadedByUser){
+            return res.status(403).json({"err": "Attempting to update house not uploaded by you"})
+        }
+
+        // Verify all fields required fields are populated
+        const verified = verifyHouseDetails(houseObject)
+        if(!verified){
+            // set list property to false
+            houseObject.listProperty = false
+            await houseObject.save()
+            return res.status(400).json(houseObject)
+        }
+        else{
+            // list Property
+            houseObject.listProperty = true
+            await houseObject.save()
+            return res.sendStatus(200)
+        }
+
+    } catch(err){
+        console.log(err)
+        reportErr(err, req)
+        return res.sendStatus(400)
+    }
+}
+
 module.exports = {
-    uploadHouse, getHouse, updateUploadedHouse, uploadHouseImage, getHouseImg, deleteSelectedImg, updateSelectedImg
+    uploadHouse, getHouse, updateUploadedHouse, uploadHouseImage, 
+    getHouseImg, deleteSelectedImg, updateSelectedImg, listHouse
 }

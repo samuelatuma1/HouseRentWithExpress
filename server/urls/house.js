@@ -7,7 +7,7 @@ const {validateToken} = require("../middlewares/tokenMiddleWare")
 
 
 // Import Controllers
-const {uploadHouse, updateUploadedHouse, uploadHouseImage, getHouseImg, deleteSelectedImg, getHouse, updateSelectedImg} = require("../controller/house")
+const {uploadHouse, updateUploadedHouse, uploadHouseImage, getHouseImg, deleteSelectedImg, getHouse, updateSelectedImg, listHouse} = require("../controller/house")
 
 // Import Validation middleware
 const {houseUploadValidation,  houseUpdateValidation} = require("../middlewares/houseUploadValidation")
@@ -35,5 +35,7 @@ houseRoute.route("/houseimgs/:imgId")
     .put(validateToken, houseUploadFilesForm, houseUploadValidation, updateSelectedImg)
     .delete(validateToken, deleteSelectedImg)
 
+houseRoute.route("/list/:houseId")
+    .get(validateToken, listHouse)
     
 module.exports = houseRoute

@@ -94,6 +94,9 @@ const HouseSchema = new mongoose.Schema({
     name: {
         type: String
     },
+    email: {
+        type: String
+    },
     phone: {
         type: String,
         validate: {
@@ -111,21 +114,18 @@ const HouseSchema = new mongoose.Schema({
         message: "Please, include a valid phone Number"
         }
     },
-    // End of Listed By
     availabilityForInspection: {
-        dayAndTime: [{
-            day: {
-                type: String,
-                enum: ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday", "saturday", "sunday"]
-            }, 
-            time: {
-                type: String,
-                enum: ["morning", "afternoon", "evening"]
-            }
-        }]
+        type: Array
     },
-
-    
+    receiveApplications: {
+        type: Boolean,
+        default: true
+    },
+    // End of Listed By
+    listProperty: {
+        type: Boolean,
+        default: false
+    }
 
 }, {
     //  Strict allows only values in the schema to be saved

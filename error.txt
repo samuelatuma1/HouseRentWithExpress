@@ -141,3 +141,42 @@
 
         ###################################################################################
         
+
+ #######################################################################################
+        Path: /upload/undefined
+
+        Request Body: {"finalDetails":{"listedBy":"owner","name":"Samuel Atuma","email":"samuel@gmail.com","phone":"+234 705 918 0332","availabilityForInspection":["tuesday","wednesday","thursday"]}}
+        Request Query: {}
+        Request Params: {"houseId":"undefined"}
+        method: PUT
+
+        Error: CastError: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "House"
+
+        ###################################################################################
+        
+
+ #######################################################################################
+        Path: /upload/undefined
+
+        Request Body: {"finalDetails":{"listedBy":"owner","name":"Ssmuel","email":"atuma@mail.com","phone":"234567890","availabilityForInspection":["tuesday"]}}
+        Request Query: {}
+        Request Params: {"houseId":"undefined"}
+        method: PUT
+
+        Error: CastError: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "House"
+
+        ###################################################################################
+        
+
+ #######################################################################################
+        Path: /upload/undefined
+
+        Request Body: {"finalDetails":{"listedBy":"owner","name":"bvcdfgh","email":"atumasaake@gmiail.com","phone":"23456","availabilityForInspection":["monday","tuesday"]}}
+        Request Query: {}
+        Request Params: {"houseId":"undefined"}
+        method: PUT
+
+        Error: CastError: Cast to ObjectId failed for value "undefined" (type string) at path "_id" for model "House"
+
+        ###################################################################################
+        

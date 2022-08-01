@@ -29,6 +29,7 @@
     outline: 0;
     margin-bottom: 20px;
 }
+
 .form label{
     border: 1px solid rgb(246, 245, 245);
     display: block;
@@ -81,4 +82,45 @@ img{
 .updateImg{
     display: flex;
     justify-content: space-between;
+}
+input[name=additional]{
+    margin-bottom: 0px;
+}
+.form button.add-btn, button.remove-btn{
+    display: inline;
+    background-color: white;
+    padding: 10px;
+    border: 2px solid black;
+    margin: 0px;
+}
+
+button.remove-btn{
+    padding: 5px;
+}
+
+.dbAmenities{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.dbAmenities span{
+    background-color: aliceblue;
+    padding: 10px;
+    border-radius: 20px;
+}
+.list-property-btn{
+    background-color: navy;
+    color: aliceblue;
+    padding: 10px;
+    border: 1px solid navy;
+    display: block;
+    margin: auto;
+    min-width: 200px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: 0.5s linear;
+}
+.list-property-btn:hover{
+    box-shadow: 0px 0px 2px 0px navy;
 }
